@@ -1,0 +1,5 @@
+services:
+  wildfly:
+    build: .
+    tty: true
+    user: ubuntu
