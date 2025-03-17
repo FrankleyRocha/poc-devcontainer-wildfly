@@ -7,7 +7,7 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"pleiades.java-extension-pack-jdk"
+				"vscjava.vscode-java-pack"
 			]
 		}
 	},

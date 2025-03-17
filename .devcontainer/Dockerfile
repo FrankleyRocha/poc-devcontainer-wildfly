@@ -32,3 +32,6 @@ USER $USERNAME
 RUN curl -s "https://get.sdkman.io" | bash
 RUN sdk install maven
 RUN sdk install java 21.0.6-tem
+
+RUN source ~/.bashrc
+RUN add-user.sh -a -u admin -p admin
