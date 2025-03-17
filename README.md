@@ -1,4 +1,4 @@
-O **`wildfly:deploy`** pertence ao **WildFly Maven Plugin**, que é utilizado para implantar aplicações Java EE/Jakarta EE diretamente em servidores **WildFly** ou **JBoss EAP**.  
+O **`wildfly:deploy`** pertence ao **WildFly Maven Plugin**, que é utilizado para implantar aplicações Java EE/Jakarta EE diretamente em servidores **WildFly** ou **JBoss EAP**.
 
 Por padrão, o JBoss EAP não vem com esse plugin configurado no `pom.xml`, então, se quiser utilizá-lo, você precisa adicioná-lo.
 
@@ -10,10 +10,11 @@ Se o seu projeto não tem esse plugin, adicione-o na seção `<plugins>` do seu 
 ```xml
 <build>
     <plugins>
+        <!-- Plugin do JBoss/WildFly para Deploy -->
         <plugin>
             <groupId>org.wildfly.plugins</groupId>
             <artifactId>wildfly-maven-plugin</artifactId>
-            <version>4.0.0.Final</version>
+            <version>5.1.2.Final</version>
         </plugin>
     </plugins>
 </build>
@@ -26,7 +27,7 @@ Isso permite que você use comandos Maven para gerenciar a implantação no JBos
 ## 🔹 **2. Configurar o Servidor JBoss EAP**
 Antes de rodar o comando, certifique-se de que:
 - O **JBoss EAP** está rodando.
-- O **modo de gerenciamento remoto** está habilitado.  
+- O **modo de gerenciamento remoto** está habilitado.
 
 Por padrão, o **JBoss EAP** aceita deploys via **CLI Management Interface** na porta **9990**.
 
