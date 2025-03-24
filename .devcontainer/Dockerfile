@@ -1,10 +1,11 @@
 FROM ubuntu:24.04
 SHELL ["/bin/bash", "-ic"]
 
-RUN apt update
+RUN echo deb http://br.archive.ubuntu.com/ubuntu/ noble main restricted > /etc/apt/sources.list
+RUN rm -rf /etc/apt/sources.list.d/*
 
 #pacotes essenciais
-RUN apt install -y \
+RUN apt update && apt install -y \
     curl \
     git \
     sudo \
@@ -34,4 +35,4 @@ RUN sdk install maven
 RUN sdk install java 21.0.6-tem
 
 RUN source ~/.bashrc
-RUN add-user.sh -a -u admin -p admin
+RUN add-user.sh -m -u admin -p admin

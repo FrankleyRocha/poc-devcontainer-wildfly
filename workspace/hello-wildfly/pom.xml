@@ -30,7 +30,7 @@
   </dependencies>
 
   <build>
-    <finalName>hello-wildfly</finalName>
+    <!-- <finalName>hello-wildfly</finalName> -->
     <plugins>
         <!-- Plugin do JBoss/WildFly para Deploy -->
         <plugin>
@@ -40,9 +40,9 @@
             <configuration>
                 <hostname>localhost</hostname>
                 <port>9990</port>
-                <username>admin</username>
-                <password>admin</password>
-                <filename>hello-wildfly.war</filename>
+                <!-- <username>admin</username>
+                <password>admin</password> -->
+                <!-- <filename>hello-wildfly.war</filename> -->
             </configuration>
         </plugin>
     </plugins>
