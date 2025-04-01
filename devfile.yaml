@@ -4,12 +4,13 @@ metadata:
 
 components:
   - name: outerloop-build
-    image:
-      imageName: minha-imagem:latest
-      dockerfile:
-        uri: .devcontainer/Dockerfile
-        buildContext: .devcontainer
-        rootRequired: false
+    container:
+      image:
+        imageName: minha-imagem:latest
+        dockerfile:
+          uri: .devcontainer/Dockerfile
+          buildContext: .devcontainer
+          rootRequired: false
 
 commands:
   - id: build-image
