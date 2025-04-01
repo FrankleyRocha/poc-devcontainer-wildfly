@@ -1,14 +1,10 @@
-schemaVersion: 2.2.0
+schemaVersion: 2.3.0
 metadata:
   name: poc-devcontainer-wildfly
 components:
-  - name: poc-devcontainer-wildfly
-    image:
-      imageName: poc-devcontainer-wildfly:latest
-      dockerfile:
-        uri: .devcontainer/Dockerfile  # Caminho do Dockerfile
-        buildContext: .devcontainer    # Define o contexto de build para a pasta .devcontainer
-commands:
-  - id: build-image
-    apply:
-      component: poc-devcontainer-wildfly
+  - name: dev-tooling
+    container:
+      image: quay.io/devfile/universal-developer-image:ubi8-latest
+      endpoints:
+        - name: http-8080
+          targetPort: 8080
