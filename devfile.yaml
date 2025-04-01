@@ -3,12 +3,14 @@ metadata:
   name: poc-devcontainer-wildfly
 
 components:
-  - name: minha-imagem
+  - name: build
     image:
       imageName: minha-imagem:latest
       dockerfile:
         uri: .devcontainer/Dockerfile  # Caminho do Dockerfile
         buildContext: .devcontainer    # Define o contexto de build para a pasta .devcontainer
+        rootRequired: false
+
   - name: tools
     container:
       image: minha-imagem:latest
@@ -19,4 +21,4 @@ components:
 commands:
   - id: build-image
     apply:
-      component: minha-imagem
+      component: build
