@@ -3,16 +3,6 @@ metadata:
   name: poc-devcontainer-wildfly
 
 components:
-  - name: outerloop-build
+  - name: tools
     container:
-      image:
-        imageName: minha-imagem:latest
-        dockerfile:
-          uri: .devcontainer/Dockerfile
-          buildContext: .devcontainer
-          rootRequired: false
-
-commands:
-  - id: build-image
-    apply:
-      component: outerloop-build
+      image: docker.io/rocha112358/wildfly
