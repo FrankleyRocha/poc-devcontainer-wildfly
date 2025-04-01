@@ -5,4 +5,4 @@ metadata:
 components:
   - name: tools
     container:
-      image: docker.io/rocha112358/wildfly
+      image: registry.access.redhat.com/ubi9/openjdk-17
