@@ -3,9 +3,20 @@ metadata:
   name: poc-devcontainer-wildfly
 
 components:
+  - name: minha-imagem
+    image:
+      imageName: minha-imagem:latest
+      dockerfile:
+        uri: .devcontainer/Dockerfile  # Caminho do Dockerfile
+        buildContext: .devcontainer    # Define o contexto de build para a pasta .devcontainer
   - name: tools
     container:
-      image: docker.io/rocha112358/wildfly:latest
+      image: minha-imagem:latest
       command: ['tail', '-f', '/dev/null']
       memoryLimit: 768Mi
       mountSources: true
+
+commands:
+  - id: build-image
+    apply:
+      component: minha-imagem
