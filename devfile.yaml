@@ -1,6 +1,7 @@
 components:
 - container:
     image: docker.io/rocha112358/wildfly:latest
+    command: ['tail', '-f', '/dev/null']
     mountSources: true
   name: my-container
 metadata:
