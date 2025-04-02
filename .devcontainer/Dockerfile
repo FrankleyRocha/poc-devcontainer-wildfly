@@ -10,7 +10,7 @@ RUN apt update && apt install -y \
 
 # Default user
 ARG USERNAME=desenv
-ARG USER_UID=10001
+ARG USER_UID=1000650000
 ARG USER_GID=$USER_UID
 
 # Create the user
