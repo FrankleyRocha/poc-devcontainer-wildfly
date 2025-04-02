@@ -1,13 +1,11 @@
 components:
 - container:
+    image: docker.io/rocha112358/wildfly:latest
     cpuLimit: "2"
     cpuRequest: 500m
-    image: docker.io/rocha112358/wildfly:latest
-    command: ['tail', '-f', '/dev/null']
-    mountSources: true
     memoryLimit: 2Gi
     memoryRequest: 1Gi
-    command: ["su", "-", "desenv"]
+    mountSources: true
   name: my-container
 metadata:
   name: poc-devcontainer-wildfly
