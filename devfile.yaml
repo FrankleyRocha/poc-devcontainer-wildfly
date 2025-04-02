@@ -1,10 +1,6 @@
 components:
 - container:
     image: docker.io/rocha112358/wildfly:latest
-    cpuLimit: "2"
-    cpuRequest: 500m
-    memoryLimit: 2Gi
-    memoryRequest: 1Gi
     mountSources: true
   name: my-container
 metadata:
