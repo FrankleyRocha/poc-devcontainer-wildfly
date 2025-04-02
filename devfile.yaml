@@ -1,11 +1,16 @@
 components:
-- container:
-    image: docker.io/rocha112358/wildfly:latest
-    command: ['tail', '-f', '/dev/null']
-    mountSources: true
-    securityContext:
-        runAsUser: 1000  # Especifica o UID do usuário
-  name: my-container
+  - container:
+      image: 'docker.io/rocha112358/wildfly:latest'
+      command:
+        - tail
+        - '-f'
+        - /dev/null
+      mountSources: true
+      endpoints:
+        - name: port-8080
+          targetPort: 8080
+          exposure: internal
+    name: my-container
 metadata:
   name: poc-devcontainer-wildfly
 schemaVersion: 2.2.0
