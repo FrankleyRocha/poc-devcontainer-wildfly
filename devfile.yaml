@@ -1,19 +1,8 @@
-commands:
-- apply:
-    component: my-image
-  id: build-image
 components:
-- image:
-    dockerfile:
-      uri: .devcontainer/Dockerfile  # Caminho do Dockerfile
-      buildContext: .devcontainer    # Define o contexto de build para a pasta .devcontainer
-      rootRequired: false
-    imageName: my-image
-  name: my-image
 - container:
     cpuLimit: "2"
     cpuRequest: 500m
-    image: my-image
+    image: docker.io/rocha112358/wildfly:latest
     command: ['tail', '-f', '/dev/null']
     mountSources: true
     memoryLimit: 2Gi
