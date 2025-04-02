@@ -7,6 +7,7 @@ components:
     mountSources: true
     memoryLimit: 2Gi
     memoryRequest: 1Gi
+    command: ["su", "-", "desenv"]
   name: my-container
 metadata:
   name: poc-devcontainer-wildfly
