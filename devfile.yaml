@@ -1,4 +1,10 @@
 components:
+  - name: wildfly-log
+    volume:
+      size: 1Gi
+  - name: wildfly-data
+    volume:
+      size: 1Gi
   - container:
       image: 'docker.io/rocha112358/wildfly:latest'
       command:

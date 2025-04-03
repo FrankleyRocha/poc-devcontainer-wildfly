@@ -20,3 +20,8 @@ RUN sdk install java 21.0.6-tem
 
 RUN source ~/.bashrc
 RUN add-user.sh -m -u admin -p admin
+
+#VOLUME /home/user/wildfly-35.0.1.Final/standalone/log
+#VOLUME /home/user/wildfly-35.0.1.Final/standalone/data
+RUN mkdir -p /home/user/wildfly-35.0.1.Final/standalone/log
+RUN mkdir -p /home/user/wildfly-35.0.1.Final/standalone/data
