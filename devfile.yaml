@@ -1,4 +1,7 @@
 components:
+  - name: maven-artifacts
+    volume:
+      size: 2Gi
   - name: tools
     container:
       image: quay.io/devfile/universal-developer-image:latest
