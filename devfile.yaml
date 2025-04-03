@@ -1,39 +1,11 @@
 components:
-  - name: wildfly-log
-    volume:
-      size: 1Gi
-  - name: wildfly-data
-    volume:
-      size: 1Gi
-  - name: wildfly-tmp
-    volume:
-      size: 1Gi
-  - name: wildfly-deployments
-    volume:
-      size: 1Gi
   - container:
-      image: 'docker.io/rocha112358/wildfly:latest'
+      image: 'quay.io/wildfly/wildfly:35.0.1.Final-jdk21'
       command:
         - tail
         - '-f'
         - /dev/null
-      volumeMounts:
-        - name: wildfly-log
-          path: /home/user/wildfly-35.0.1.Final/standalone/log
-        - name: wildfly-data
-          path: /home/user/wildfly-35.0.1.Final/standalone/data
-        - name: wildfly-tmp
-          path: /home/user/wildfly-35.0.1.Final/standalone/tmp
-        - name: wildfly-deployments
-          path: /home/user/wildfly-35.0.1.Final/standalone/deployments
       mountSources: true
-      endpoints:
-        - name: port-8080
-          targetPort: 8080
-          exposure: public
-        - name: port-9990
-          targetPort: 9990
-          exposure: public
     name: my-container
 metadata:
   name: poc-devcontainer-wildfly
