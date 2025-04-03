@@ -1,12 +1,25 @@
 components:
-  - container:
-      image: 'quay.io/wildfly/wildfly:35.0.1.Final-jdk21'
+  - name: tools
+    container:
+      image: quay.io/devfile/universal-developer-image:latest
       command:
         - tail
         - '-f'
         - /dev/null
       mountSources: true
-    name: my-container
+      volumeMounts:
+        - name: maven-artifacts
+          path: /home/user/.m2
+      cpuLimit: "2"
+      memoryLimit: 4Gi
+  - container:
+      image: 'quay.io/wildfly/wildfly:35.0.1.Final-jdk21'
+      command:
+        - /opt/jboss/wildfly/bin/standalone.sh
+        - '--debug'
+      cpuLimit: "2"
+      memoryLimit: 4Gi
+    name: wildfly
 metadata:
   name: poc-devcontainer-wildfly
 schemaVersion: 2.2.0
