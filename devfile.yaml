@@ -1,10 +1,10 @@
 components:
-  - name: wildfly-log
+  - name: wildfly
     volume:
-      size: 1Gi
-  - name: wildfly-data
-    volume:
-      size: 1Gi
+      size: 2Gi
+  #- name: wildfly-data
+  #  volume:
+  #    size: 1Gi
   - container:
       image: 'docker.io/rocha112358/wildfly:latest'
       command:
@@ -12,10 +12,10 @@ components:
         - '-f'
         - /dev/null
       volumeMounts:
-        - name: wildfly-log
-          path: /home/user/wildfly-35.0.1.Final/standalone/log
-        - name: wildfly-data
-          path: /home/user/wildfly-35.0.1.Final/standalone/data
+        - name: wildfly
+          path: /home/user/wildfly-35.0.1.Final/standalone
+        #- name: wildfly-data
+        #  path: /home/user/wildfly-35.0.1.Final/standalone/data
       mountSources: true
       endpoints:
         - name: port-8080
