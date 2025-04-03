@@ -5,10 +5,18 @@ components:
         - tail
         - '-f'
         - /dev/null
+      volumeMounts:
+        - name: wildfly-log
+          path: /home/user/wildfly-35.0.1.Final/standalone/log
+        - name: wildfly-data
+          path: /home/user/wildfly-35.0.1.Final/standalone/data
       mountSources: true
       endpoints:
         - name: port-8080
           targetPort: 8080
+          exposure: public
+        - name: port-9990
+          targetPort: 9990
           exposure: public
     name: my-container
 metadata:

@@ -1,8 +1,25 @@
-FROM quay.io/devfile/universal-developer-image:ubi9-latest
+FROM ubuntu:24.04
 SHELL ["/bin/bash", "-ic"]
 
+#pacotes essenciais
+RUN apt update && apt install -y \
+    curl \
+    git \
+    sudo \
+    zip unzip
+
 # Default user
-ARG USERNAME=user
+ARG USERNAME=desenv
+ARG USER_UID=1000650000
+ARG USER_GID=$USER_UID
+
+# Create the user
+RUN groupadd --gid $USER_GID $USERNAME \
+    && useradd --create-home --uid $USER_UID --gid $USER_GID -m $USERNAME -s /bin/bash \
+    #
+    # [Optional] Add sudo support. Omit if you don't need to install software after connecting.
+    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
+    && chmod 0440 /etc/sudoers.d/$USERNAME
 
 USER $USERNAME
 
