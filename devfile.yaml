@@ -2,13 +2,6 @@ components:
   - name: maven-artifacts
     volume:
       size: 1Gi
-  - name: tools
-    container:
-      image: quay.io/devfile/universal-developer-image:latest
-      mountSources: true
-      volumeMounts:
-        - name: maven-artifacts
-          path: /home/user/.m2
   - name: eap
     container:
       image: registry.redhat.io/jboss-eap-7/eap74-openjdk11-openshift-rhel8:7.4.4
@@ -19,7 +12,7 @@ components:
           value: "-Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n -Dsun.util.logging.disableCallerCheck=true"
         - value: '-Dmaven.repo.local=/home/jboss/.m2/repository/repository -Dcom.redhat.xpaas.repo.jbossorg'
           name: MVN_ARGS_APPEND
-      memoryLimit: 1Gi
+      memoryLimit: 2Gi
       endpoints:
         - exposure: public
           name: eap
