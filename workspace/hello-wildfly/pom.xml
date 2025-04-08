@@ -10,11 +10,13 @@
   <packaging>war</packaging>
 
   <name>hello-wildfly Maven Webapp</name>
-  
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
+    <wildfly.version>35.0.1.Final</wildfly.version>
+    <wildfly.dir>${project.build.directory}/wildfly/wildfly-${wildfly.version}</wildfly.dir>
   </properties>
 
   <dependencies>
@@ -26,23 +28,69 @@
         <version>10.0.0</version>
         <scope>provided</scope>
     </dependency>
-    
+
   </dependencies>
 
   <build>
     <!-- <finalName>hello-wildfly</finalName> -->
     <plugins>
+        <!-- Plugin para baixar o ZIP do WildFly -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>3.8.1</version>
+          <executions>
+            <execution>
+              <id>download-wildfly</id>
+              <phase>validate</phase>
+              <goals>
+                <goal>get</goal>
+              </goals>
+              <configuration>
+                <artifact>org.wildfly:wildfly-dist:${wildfly.version}:zip</artifact>
+                <dest>${project.build.directory}</dest>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+
+        <!-- Plugin para descompactar o ZIP -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>3.0.0</version>
+          <executions>
+            <execution>
+              <id>unzip-wildfly</id>
+              <phase>process-resources</phase>
+              <configuration>
+                <target>
+                  <mkdir dir="${wildfly.dir}" />
+                  <unzip src="${project.build.directory}/wildfly-dist-${wildfly.version}.zip"
+                        dest="${project.build.directory}/wildfly"
+                        overwrite="true" />
+                </target>
+              </configuration>
+              <goals>
+                <goal>run</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
         <!-- Plugin do JBoss/WildFly para Deploy -->
         <plugin>
             <groupId>org.wildfly.plugins</groupId>
             <artifactId>wildfly-maven-plugin</artifactId>
             <version>5.1.2.Final</version>
             <configuration>
-                <hostname>localhost</hostname>
-                <port>9990</port>
+                <!-- <hostname>localhost</hostname>
+                <port>9990</port> -->
                 <!-- <username>admin</username>
                 <password>admin</password> -->
                 <!-- <filename>hello-wildfly.war</filename> -->
+                <wildfly-home>${wildfly.dir}</wildfly-home>
+                <filename>${project.build.directory}/${project.build.finalName}.war</filename>
             </configuration>
         </plugin>
     </plugins>
