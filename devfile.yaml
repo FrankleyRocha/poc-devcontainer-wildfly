@@ -4,14 +4,7 @@ components:
       size: 1Gi
   - name: eap
     container:
-      image: registry.redhat.io/jboss-eap-7/eap74-openjdk11-openshift-rhel8:7.4.4
-      env:
-        - name: MAVEN_OPTS
-          value: "-Xmx200m -XX:+UseParallelGC -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xms20m -Djava.security.egd=file:/dev/./urandom -Duser.home=/home/jboss"
-        - name: JAVA_OPTS_APPEND
-          value: "-Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n -Dsun.util.logging.disableCallerCheck=true"
-        - value: '-Dmaven.repo.local=/home/jboss/.m2/repository/repository -Dcom.redhat.xpaas.repo.jbossorg'
-          name: MVN_ARGS_APPEND
+      image: quay.io/devfile/universal-developer-image:ubi9-latest
       memoryLimit: 2Gi
       endpoints:
         - exposure: public
@@ -20,7 +13,7 @@ components:
           targetPort: 8080
       volumeMounts:
         - name: maven-artifacts
-          path: /home/jboss/.m2
+          path: /home/user/.m2
 metadata:
   name: poc-devcontainer-wildfly
 schemaVersion: 2.2.0
