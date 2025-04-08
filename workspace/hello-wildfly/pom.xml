@@ -39,26 +39,30 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-dependency-plugin</artifactId>
           <version>3.8.1</version>
-          <executions>
-            <execution>
-              <id>download-wildfly</id>
-              <phase>validate</phase>
-              <goals>
-                <goal>get</goal>
-              </goals>
-              <configuration>
-                <artifact>org.wildfly:wildfly-dist:${wildfly.version}:zip</artifact>
-                <dest>${project.build.directory}</dest>
-              </configuration>
-            </execution>
-          </executions>
+            <executions>
+              <execution>
+                <id>get-wildfly</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>get</goal>
+                  <goal>copy</goal>
+                </goals>
+                <configuration>
+                  <artifact>org.wildfly:wildfly-dist:${wildfly.version}:zip</artifact>
+                  <outputDirectory>${project.build.directory}</outputDirectory>
+                  <overWriteReleases>true</overWriteReleases>
+                  <overWriteSnapshots>true</overWriteSnapshots>
+                  <overWriteIfNewer>true</overWriteIfNewer>
+                </configuration>
+              </execution>
+            </executions>
         </plugin>
 
         <!-- Plugin para descompactar o ZIP -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-antrun-plugin</artifactId>
-          <version>3.0.0</version>
+          <version>3.1.0</version>
           <executions>
             <execution>
               <id>unzip-wildfly</id>
