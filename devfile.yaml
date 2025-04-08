@@ -1,7 +1,7 @@
 components:
   - name: maven-artifacts
     volume:
-      size: 2Gi
+      size: 1Gi
   - name: tools
     container:
       image: quay.io/devfile/universal-developer-image:latest
@@ -9,16 +9,25 @@ components:
       volumeMounts:
         - name: maven-artifacts
           path: /home/user/.m2
-      cpuLimit: "2"
-      memoryLimit: 4Gi
+  - name: eap
     container:
-      image: 'quay.io/wildfly/wildfly:35.0.1.Final-jdk21'
-      command:
-        - /opt/jboss/wildfly/bin/standalone.sh
-        - '--debug'
-      cpuLimit: "2"
-      memoryLimit: 4Gi
-    name: wildfly
+      image: registry.redhat.io/jboss-eap-7/eap74-openjdk11-openshift-rhel8:7.4.4
+      env:
+        - name: MAVEN_OPTS
+          value: "-Xmx200m -XX:+UseParallelGC -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xms20m -Djava.security.egd=file:/dev/./urandom -Duser.home=/home/jboss"
+        - name: JAVA_OPTS_APPEND
+          value: "-Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n -Dsun.util.logging.disableCallerCheck=true"
+        - value: '-Dmaven.repo.local=/home/jboss/.m2/repository/repository -Dcom.redhat.xpaas.repo.jbossorg'
+          name: MVN_ARGS_APPEND
+      memoryLimit: 1Gi
+      endpoints:
+        - exposure: public
+          name: eap
+          protocol: http
+          targetPort: 8080
+      volumeMounts:
+        - name: maven-artifacts
+          path: /home/jboss/.m2
 metadata:
   name: poc-devcontainer-wildfly
 schemaVersion: 2.2.0
