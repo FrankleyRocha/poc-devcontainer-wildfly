@@ -11,7 +11,7 @@ components:
           path: /home/user/.m2
       cpuLimit: "2"
       memoryLimit: 4Gi
-  - container:
+    container:
       image: 'quay.io/wildfly/wildfly:35.0.1.Final-jdk21'
       command:
         - /opt/jboss/wildfly/bin/standalone.sh
